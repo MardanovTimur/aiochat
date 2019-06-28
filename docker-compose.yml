@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  
+  web_local:
+    build: .
+    restart: 'always'
+    ports:
+      - '8080:80'
+    volumes:
+      - .:/project
+    links:
+      -postgres
+    networks:
+      - default
+      - database_bridge
+
+  postgres:
+    image: postgresql:latest
+    envfile: '.postgresqlenv'
+    restart: 'always'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - database_bridge
+      
+volumes:
+  # postgres data
+  pgdata: {}
+
+networks:
+  # bridge db-web
+  database_bridge: {}
