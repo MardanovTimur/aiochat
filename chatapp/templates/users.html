@@ -1,0 +1,11 @@
+{% set title = "users" %}
+
+{% if users %}
+    <ul>
+    {% for user in users %}
+        <li>{{ user.username }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No questions are available.</p>
+{% endif %}

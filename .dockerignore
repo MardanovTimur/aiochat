@@ -1,0 +1,14 @@
+# ignore elements in COPY ADD commands
+env/
+__pycache__/
+
+.gitignore
+
+
+*.pyc
+
+Dockerfile
+docker-compose.yml
+
+LICENSE
+

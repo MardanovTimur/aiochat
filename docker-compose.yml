@@ -1,26 +1,43 @@
 version: '3'
 
 services:
-  
-  web_local:
+  web:
     build: .
     restart: 'always'
     ports:
-      - '8080:80'
+      - '80:8080'
     volumes:
       - .:/project
+    command: sh -c "python3 chatapp/main.py"
     links:
-      -postgres
+      - postgres
     networks:
       - default
       - database_bridge
 
+  local:
+    build: .
+    restart: 'always'
+    ports:
+      - '80:8080'
+    volumes:
+      - .:/project
+    command: sh -c "adev runserver chatapp/main.py"
+    links:
+      - postgres
+    networks:
+      - default
+      - database_bridge
+    
+
   postgres:
-    image: postgresql:latest
-    envfile: '.postgresqlenv'
+    image: postgres:latest
+    env_file: '.postgresqlenv'
     restart: 'always'
     volumes:
       - pgdata:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
     networks:
       - database_bridge
       

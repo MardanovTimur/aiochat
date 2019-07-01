@@ -1,6 +1,6 @@
 # config/chatapp.yml database
 postgres:
-  database: chatapp_demo
+  database: chatapp
   user: postgres
   password: adminadmin
   host: localhost
